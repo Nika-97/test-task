@@ -1,0 +1,79 @@
+// Ноутбуки  и квадратные мониторы и горизонтальные планшеты
+
+@media (max-width: 1280px) {
+}
+@mixin max1280 {
+  @media (max-width: 1280px) {
+    @content;
+  }
+}
+
+// Планшеты вертикальные
+
+@media (max-width: 1050px) {
+}
+@mixin max1050 {
+  @media (max-width: 1050px) {
+    @content;
+  }
+}
+
+/* ------------------------ */
+
+@media (max-height: 999px) and (max-width: 1050px) {
+}
+@mixin max-height-999-max-width-1050 {
+  @media (max-height: 999px) and (max-width: 1050px) {
+    @content;
+  }
+}
+
+// Устройства Medium (планшеты, 768 пикселей и ниже)
+
+@media (max-width: 810px) {
+}
+@mixin max810 {
+  @media (max-width: 810px) {
+    @content;
+  }
+}
+
+/* ------------------------ */
+
+@media (orientation: landscape) and (max-width: 800px) {
+}
+@mixin max800-landscape {
+  @media (orientation: landscape) and (max-width: 800px) {
+    @content;
+  }
+}
+
+// Устройства Small Телефоны
+
+@media (max-width: 576px) {
+}
+@mixin max576 {
+  @media (max-width: 576px) {
+    @content;
+  }
+}
+
+/* ------------------------ */
+
+@media (max-width: 360px) {
+}
+@mixin max360 {
+  @media (max-width: 360px) {
+    @content;
+  }
+}
+
+/* ------------------------ */
+
+@media (max-width: 320px) {
+}
+@mixin max320 {
+  @media (max-width: 320px) {
+    @content;
+  }
+}

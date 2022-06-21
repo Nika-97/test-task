@@ -1,0 +1,323 @@
+@import "./reset.scss";
+@import "./config.scss";
+@import "./media.scss";
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Trebuchet-MS", sans-serif;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 5e-5) 49.88%, rgba(0, 0, 0, 0.5) 100%),
+        url(../img/Pattern.jpg) no-repeat;
+    background-size: cover;
+    @include max1050 {
+        background-repeat: repeat;
+        background-size: contain;
+    }
+}
+
+span {
+    display: block;
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    @include max-height-999-max-width-1050 {
+        padding: 5% 0;
+    }
+    @include max810 {
+        padding: 5% 0;
+    }
+}
+
+.container {
+    width: 1280px;
+}
+
+.cards {
+    padding: 0 80px;
+    @include max1280 {
+        padding: 0 5%;
+    }
+    @include max810 {
+        padding: 0 4%;
+    }
+    @include max800-landscape {
+        padding: 0 12%;
+    }
+    @include max320 {
+        padding: 0;
+    }
+
+    &__text {
+        font-family: "Exo 2", sans-serif;
+        font-size: 36px;
+        line-height: 44px;
+        color: $light-text-color;
+        text-align: center;
+        text-shadow: 0px 1px 1px #000000;
+    }
+
+    &__items {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 24px;
+        @include max1050 {
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        @include max800-landscape {
+            justify-content: center;
+        }
+        @include max576 {
+            justify-content: center;
+        }
+    }
+}
+
+/* Карточка продукта */
+
+.card {
+    max-width: 320px;
+    @include max1050 {
+        &:last-child {
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+    }
+    @include max800-landscape {
+        margin-top: 40px;
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+    @include max576 {
+        margin-top: 40px;
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__bordered-content {
+        background: url(../img/Cat.png) no-repeat, linear-gradient(135deg, transparent 30px, $card-background-color 0);
+        background-position-y: bottom;
+        background-size: contain;
+        border-radius: 8px;
+        width: 312px;
+        height: 472px;
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            background: linear-gradient(135deg, transparent 31px, $main-color 0);
+            width: 320px;
+            min-height: 480px;
+            height: calc(100% + 8px);
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            z-index: -1;
+            border-radius: 12px;
+            @include max320 {
+                width: 270px;
+            }
+        }
+
+        &:hover {
+            &::before {
+                background: linear-gradient(135deg, transparent 31px, $hover-color 0);
+            }
+            .card__product-weight {
+                background-color: $hover-color;
+            }
+        }
+
+        @include max320 {
+            width: 262px;
+        }
+
+        /* Стили для состояния выбранной по клику карточки */
+
+        &_selected {
+            &::before {
+                background: linear-gradient(135deg, transparent 31px, $selected-color 0);
+            }
+
+            .card__product-weight {
+                background-color: $selected-color;
+            }
+
+            &:hover {
+                &::before {
+                    background: linear-gradient(135deg, transparent 31px, $selected-hover-color 0);
+                }
+
+                .card__product-weight {
+                    background-color: $selected-hover-color;
+                }
+
+                .card__pre-title {
+                    display: none;
+                }
+                .card__pre-title_selected-hover {
+                    display: block;
+                }
+            }
+
+            &.no-hover {
+                .card__pre-title {
+                    display: block;
+                }
+                .card__pre-title_selected-hover {
+                    display: none;
+                }
+            }
+        }
+
+        /* Стили для состояния недоступной карточки */
+
+        &_disabled {
+            background: linear-gradient(135deg, transparent 30px, rgba(255, 255, 255, 0.5) 0),
+                url(../img/Cat.png) bottom/contain no-repeat, linear-gradient(135deg, transparent 30px, #f2f2f2 0);
+            pointer-events: none;
+
+            &::before {
+                background: linear-gradient(135deg, transparent 31px, $disabled-color 0);
+            }
+
+            .card__product-weight {
+                background-color: $disabled-color;
+            }
+
+            .card__pre-title,
+            .card__title,
+            .card__details-item {
+                color: $disabled-color;
+                opacity: 0.5;
+            }
+        }
+    }
+    .card__bordered-content_selected ~ .card__bottom-text {
+        display: none;
+    }
+    .card__bordered-content_selected ~ .card__bottom-text_selected {
+        display: block;
+    }
+    .card__bordered-content_disabled ~ .card__bottom-text {
+        display: none;
+    }
+    .card__bordered-content_disabled ~ .card__bottom-text_disabled {
+        display: block;
+    }
+
+    &__text {
+        position: relative;
+        width: 100%;
+        padding: 21px 56px 0 51px;
+        @include max320 {
+            padding: 21px 11% 0;
+        }
+    }
+
+    &__pre-title {
+        font-size: 16px;
+        line-height: 19px;
+        color: $card-text-color;
+
+        &_selected-hover {
+            display: none;
+            color: $selected-hover-color;
+        }
+    }
+
+    &__title {
+        font-weight: bold;
+        font-size: 48px;
+        line-height: 56px;
+        color: $title-color;
+        margin-top: 5px;
+
+        span {
+            font-weight: inherit;
+            color: inherit;
+            font-size: 24px;
+            line-height: 28px;
+        }
+    }
+
+    &__details {
+        margin-top: 15px;
+    }
+    &__details-item {
+        font-size: 14px;
+        line-height: 16px;
+        color: $card-text-color;
+
+        strong {
+            font-weight: bold;
+        }
+    }
+
+    &__product-weight {
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        background-color: $main-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+    }
+    &__product-weight-num {
+        font-size: 42px;
+        line-height: 42px;
+        color: $light-text-color;
+    }
+    &__product-weight-unit {
+        font-size: 21px;
+        line-height: 22px;
+        color: $light-text-color;
+    }
+
+    &__bottom-text {
+        font-size: 13px;
+        line-height: 15px;
+        color: $light-text-color;
+        margin-top: 18px;
+        text-align: center;
+
+        &_selected {
+            display: none;
+        }
+        &_disabled {
+            display: none;
+            color: $disabled-text-color;
+        }
+    }
+    &__bottom-btn {
+        border: none;
+        background: transparent;
+        font-size: inherit;
+        line-height: inherit;
+        font-weight: bold;
+        color: $main-color;
+        cursor: pointer;
+        padding: 0;
+        border-bottom: dashed 1.5px $main-color;
+
+        &:hover {
+            color: $hover-color;
+            border-bottom-color: $hover-color;
+        }
+    }
+}
